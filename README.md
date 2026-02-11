@@ -242,7 +242,7 @@ torchvision==0.16.0+cu121
 <table>
   <tr>
     <td align="center">
-      <img src="Project/TrainandValidationnAccuracy.png" alt="Figure 4: Train and Validation Accuracy" />
+      <img src="Project/TrainandValidationAccuracy.png" alt="Figure 4: Train and Validation Accuracy" />
       <p>Figure 4: Train and Validation Accuracy</p>
     </td>
     <td align="center">
@@ -274,3 +274,4 @@ preprocessing made it too difficult to distinguish between the 2 classes.
 
 <a id="reference3"></a>
 [3] Rao, Y., Zhao, W., Zhu, Z., Zhou, J., & Lu, J. (2023). Global filter networks for visual recognition. *GitHub* https://github.com/raoyongming/GFNet
+
