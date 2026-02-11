@@ -8,7 +8,7 @@ that aims to predict whether a patient has Alzheimer's with up to 80% accuracy.
 
 Vision transformers are a variety of transformer architecture that were originally used for natural language processing. Instead of using convolutional neural nets
 ViT's divide an image into a sequence of flattened sub-images called patches. Traditionally, each patch is then linearly embedded into a fixed dimensional vector.
-Positional embeddings are then added to these patch embeddings to retain spacial information and the resulting sequence is then parsed through the transform encoder
+Positional embeddings are then added to these patch embeddings to retain spatial information and the resulting sequence is then parsed through the transform encoder
 which is then finally processed by a multi-layered perceptron (MLP) which performs the image classification. Figure 1
 
 <p align="center">
@@ -21,7 +21,7 @@ Figure 1: Structure of the Vision Transformer (Karim et al., n.a)
 
 The implementation used throughout this project required some modifications to the standard ViT to turn it into a GFNet. The multi-head attention concept used in ViT's is removed
 and replaced with a global filter layer as shown in figure 2. As opposed to the attention concept used in ViTs, the global filter layer performs a 2D fast Fourier transform to convert
-spatial data into a frequency space, then performs element-wise mmultiplication with all of the learnable filters followed by the inverse Fourier transform to bring everything back
+the spatial data space into frequency space, then performs element-wise multiplication with all of the learnable filters followed by the inverse Fourier transform to bring everything back
 into the spatial domain. Within the context of the task, this process allows GFNet to model global and local dependancies (i.e spatial patterns in the brain such as grey matter decay)
 with log linear time complexity compared to ViT's quadratic time complexity. This allows it to scale farther and is not intractable for ultra high resolution image recognition.
 
@@ -40,7 +40,7 @@ First, any potential imbalances in the dataset would have to be mitigated to avo
 These sets were then further sub-divided into both Alzheimers and normal brain scans. There were no class imbalances, so any class balancing preprocessing could be mitigated. Each image
 was cropped (as to remove the black background) and then gray scaled. Initially, I avoided using further techniques as I believed random cropping and rotations would make it harder for the model
 to gain context. However, I realised this was not the case. random rotations, resizing, and erasing (within bounds) were all then applied to the images in an attempt to improve model generalisation.
-Each image was then resized to fit the default format for teh GFNet (224x224), converted to a tensor, and normalised using the mean and standard deviation of the original cropped dataset.
+Each image was then resized to fit the default format for the GFNet (224x224), converted to a tensor, and normalised using the mean and standard deviation of the original cropped dataset.
 
 <p align="center">
   <img src="Project/Photos-for-readme/processedVUnprocessed.PNG" alt="Figure 3: Before and After Preprocessing Of Data" />
@@ -79,7 +79,7 @@ activation functions are also used to add non-linearity into the structure- allo
         return x
 ```
 
-The PatchyEmbedding class is used to breakdown images into patch tokens. The class first defines multiple preset values such as image size, patch size, and the latent space parameters. The number of patches is then
+The PatchyEmbedding class is used to breakdown images into patch tokens. The class first defines multiple preset values such as image size, patch size, and the latent space parameters. The number of patches are then
 computed with the provided values:
 
 ```python
@@ -111,7 +111,7 @@ The GlobalFilter class applies a global filter to an input tensor in the frequen
 The initialization defines some parameters and also defines a learnable set of complex weights (initially Gaussian noise). In the forward pass, the tensor is first reshaped to match spatial dimensions.
 FFT with conjugate symmetry is then applied to the input where the previously initialized complex weights are used as a filter in the frequency domain. This is the key component in this algorithm as
 filtering in the frequency domain is efficient for capturing global information because each frequency component affects a different spatial pattern. When these frequencies are adjusted by the learnable
-parameter weights, the model will learn to express specific spatial features across the entire input. The reverse Fourier transform is then applied and the resulting tensor is reshapen.
+parameter weights, the model will learn to express specific spatial features across the entire input. The inverse Fourier transform is then applied and the resulting tensor is re-shapen.
 ```python
         x = x.view(B, a, b, C).to(torch.float32)
 
@@ -274,5 +274,6 @@ preprocessing made it too difficult to distinguish between the 2 classes.
 
 <a id="reference3"></a>
 [3] Rao, Y., Zhao, W., Zhu, Z., Zhou, J., & Lu, J. (2023). Global filter networks for visual recognition. *GitHub* https://github.com/raoyongming/GFNet
+
 
 
