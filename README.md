@@ -1,29 +1,29 @@
 # ADNI Classifier Based on GFNet Transformer
 ## Introduction
-Alzheimer`s disease is a chronic neurodegenerative condition that slowy impairs an afflicted person`s  memory over decades. Modern medicine offers little insight
+Alzheimer's disease is a chronic neurodegenerative condition that slowy impairs an afflicted person's  memory over decades. Modern medicine offers little insight
 into this disease and no cure has been discovered. However, their are preventative medications available that can delay early onset of Alzheimers if early
 intervention is taken. Not everyone has the luxury to healthcare which makes predictive machine learning classifiers one of the cheapest and fastest ways
 to get diagnosed. In this test, a vision transformer (ViT) variety known as Global Filter Neural Network (GFNet) is used to build a classification model
-that aims to predict whether a patient has Alzheimer`s with up to 80% accuracy.
+that aims to predict whether a patient has Alzheimer's with up to 80% accuracy.
 
 Vision transformers are a variety of transformer architecture that were originally used for natural language processing. Instead of using convolutional neural nets
-ViT`s divide an image into a sequence of flattened sub-images called patches. Traditionally, each patch is then linearly embedded into a fixed dimensional vector.
+ViT's divide an image into a sequence of flattened sub-images called patches. Traditionally, each patch is then linearly embedded into a fixed dimensional vector.
 Positional embeddings are then added to these patch embeddings to retain spacial information and the resulting sequence is then parsed through the transform encoder
 which is then finally processed by a multi-layered perceptron (MLP) which performs the image classification. Figure 1
 
 <p align="center">
-  <img src="Project/transformer_diagram.png" alt="Figure 1: Structure of the Vision Transformer (Karim et al., n.a)" />
+  <img src="Project/Photos-for-readme/transformer_diagram.png" alt="Figure 1: Structure of the Vision Transformer (Karim et al., n.a)" />
 </p>
 
 <p align="center">
 Figure 1: Structure of the Vision Transformer (Karim et al., n.a)
 </p>
 
-The implementation used throughout this project required some modifications to the standard ViT to turn it into a GFNet. The multi-head attention concept used in ViT`s is removed
+The implementation used throughout this project required some modifications to the standard ViT to turn it into a GFNet. The multi-head attention concept used in ViT's is removed
 and replaced with a global filter layer as shown in figure 2. As opposed to the attention concept used in ViTs, the global filter layer performs a 2D fast Fourier transform to convert
 spatial data into a frequency space, then performs element-wise mmultiplication with all of the learnable filters followed by the inverse Fourier transform to bring everything back
 into the spatial domain. Within the context of the task, this process allows GFNet to model global and local dependancies (i.e spatial patterns in the brain such as grey matter decay)
-with log linear time complexity compared to ViT`s quadratic time complexity. This allows it to scale farther and is not intractable for ultra high resolution image recognition.
+with log linear time complexity compared to ViT's quadratic time complexity. This allows it to scale farther and is not intractable for ultra high resolution image recognition.
 
 <p align="center">
   <img src="Project/Photos-for-readme/fftDisplay.PNG" alt="Figure 2: The Structure of GFNet (Yongming Rao et al., 2021)" />
@@ -228,7 +228,7 @@ whilst allowing for adjustments like early stopping if performance plateaus or d
 
 ### Predict.py
 Predict.py provides a pipeline for training, saving, loading, and evaluating the GFNet model. It first initializes the model with default hyperparameters and trains it. The path is then saved to a state dictionary which is then immediately
-reused for model evaluation. The test dataset is processed using a DataLoader and is transformed via cropping, grey-scale conversion, resizing, and normalization. During evaluation the model`s accuracy is calculated by comparing predictions to
+reused for model evaluation. The test dataset is processed using a DataLoader and is transformed via cropping, grey-scale conversion, resizing, and normalization. During evaluation the model's accuracy is calculated by comparing predictions to
 true labels without gradient updates. This pipeline allows for seamless transitions from training to testing while supporting reusability, modularity, and evaluation on unseen test data.
 
 
@@ -274,4 +274,5 @@ preprocessing made it too difficult to distinguish between the 2 classes.
 
 <a id="reference3"></a>
 [3] Rao, Y., Zhao, W., Zhu, Z., Zhou, J., & Lu, J. (2023). Global filter networks for visual recognition. *GitHub* https://github.com/raoyongming/GFNet
+
 
