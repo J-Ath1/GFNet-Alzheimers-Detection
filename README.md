@@ -26,7 +26,7 @@ into the spatial domain. Within the context of the task, this process allows GFN
 with log linear time complexity compared to ViT`s quadratic time complexity. This allows it to scale farther and is not intractable for ultra high resolution image recognition.
 
 <p align="center">
-  <img src="Project/fftDisplay.PNG" alt="Figure 2: The Structure of GFNet (Yongming Rao et al., 2021)" />
+  <img src="Project/Photos-for-readme/fftDisplay.PNG" alt="Figure 2: The Structure of GFNet (Yongming Rao et al., 2021)" />
 </p>
 
 <p align="center">
@@ -43,7 +43,7 @@ to gain context. However, I realised this was not the case. random rotations, re
 Each image was then resized to fit the default format for teh GFNet (224x224), converted to a tensor, and normalised using the mean and standard deviation of the original cropped dataset.
 
 <p align="center">
-  <img src="Project/processedVUnprocessed.PNG" alt="Figure 3: Before and After Preprocessing Of Data" />
+  <img src="Project/Photos-for-readme/processedVUnprocessed.PNG" alt="Figure 3: Before and After Preprocessing Of Data" />
 </p>
 
 <p align="center">
@@ -242,11 +242,11 @@ torchvision==0.16.0+cu121
 <table>
   <tr>
     <td align="center">
-      <img src="Project/TrainandValidationAccuracy.png" alt="Figure 4: Train and Validation Accuracy" />
+      <img src="Project/Photos-for-readme/TrainandValidationAccuracy.png" alt="Figure 4: Train and Validation Accuracy" />
       <p>Figure 4: Train and Validation Accuracy</p>
     </td>
     <td align="center">
-      <img src="Project/Train_AND_VALIDATE_LOSS.png" alt="Figure 5: Train and Validation Loss" />
+      <img src="Project/Photos-for-readme/Train_AND_VALIDATE_LOSS.png" alt="Figure 5: Train and Validation Loss" />
       <p>Figure 5: Train and Validation Loss</p>
     </td>
   </tr>
@@ -256,7 +256,7 @@ torchvision==0.16.0+cu121
 The training and validation graphs indicate that the model is learning effectively, with both training and validation losses decreasing steadily over the epochs. The accuracy plot shows a strong upward trend in both training and validation accuracy, stabilizing around 90% training accuracy and 80% validation accuracy, suggesting that the model generalizes well on the validation set without severe overfitting. However, when tested on unseen data, the model achieved a 68% accuracy, which, while decent, reveals a performance gap between validation and test data. This gap may suggest that the model learned patterns specific to the validation set but struggles with generalization to entirely new data. A future attempt where all 19 of each patient's brain MRI scans are parsed as a 3D object may improve accuracy on unseen data.
 
 <p align="center">
-  <img src="Project/UpdatedConfusion.PNG" alt="Figure 6: Confusion Matrix (Class0=Normal, Class1=Alzheimers)" />
+  <img src="Project/Photos-for-readme/UpdatedConfusion.PNG" alt="Figure 6: Confusion Matrix (Class0=Normal, Class1=Alzheimers)" />
 </p>
 
 <p align="center">
